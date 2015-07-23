@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class MainActivity extends Activity {
     private static EditText newItem;
     private static ItemListAdapter mAdapter;
     private static Context context;
+    private static TextView emptyText;
 
     private final static String MASTER_SAVE_NAME = "MASTER_SAVE_DATA";
 
@@ -40,6 +42,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
 
         context = this;
+
+        emptyText = (TextView)findViewById(R.id.emptyText);
 
         itemList = new ArrayList<String>();
         loadSavedList();
@@ -55,6 +59,8 @@ public class MainActivity extends Activity {
                 return true;
             }
         });
+
+
 
         Button addItem = (Button)findViewById(R.id.addButton);
 
@@ -95,6 +101,15 @@ public class MainActivity extends Activity {
                 itemList.add(c);
             }
         }
+
+        if(itemList.size() < 1)
+        {
+            emptyText.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            emptyText.setVisibility(View.GONE);
+        }
     }
 
     private static void updateSavedList()
@@ -104,6 +119,15 @@ public class MainActivity extends Activity {
         System.out.println("Data!: " + data);
         settings.putString(MASTER_SAVE_NAME, data);
         settings.commit();
+
+        if(itemList.size() < 1)
+        {
+            emptyText.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            emptyText.setVisibility(View.GONE);
+        }
     }
 
     @Override
