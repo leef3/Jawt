@@ -1,4 +1,4 @@
-package com.redleefstudios.redleeflibrary;
+package com.redleefstudios.redleeflibrary.Helpers;
 
 /**
  * Created by Fred on 3/23/2016.
